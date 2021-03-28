@@ -38,8 +38,9 @@ namespace API.Tests
       }, 5 , true};
       yield return new object[] { new List<DoorModel<string>> {
         new DoorModel<string> { Content = "Car", Amount = 5, CanBeOpenedByMonty = false},
-        new DoorModel<string> { Content = "Goat", Amount = 5, CanBeOpenedByMonty = true}
-      }, 6 , false};
+        new DoorModel<string> { Content = "Goat", Amount = 5, CanBeOpenedByMonty = true},
+        new DoorModel<string> { Content = "Sheep", Amount = 5, CanBeOpenedByMonty = true}
+      }, 8 , false};
     }
   }
 }
