@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using API.Models;
 using API.Models.Exceptions;
 using API.Services;
@@ -19,7 +18,13 @@ namespace API.Controllers
     }
 
     [HttpGet]
-    public IActionResult PickOne<T>(IEnumerable<DoorModel<T>> doors, int switches)
+    public string Happy()
+    {
+      return "Hello";
+    }
+
+    [HttpPost]
+    public IActionResult PickOne<T>([FromBody] IEnumerable<DoorModel<T>> doors, [FromBody] int switches)
     {
       try
       {
@@ -28,12 +33,12 @@ namespace API.Controllers
       catch (TooManySwitchesException e)
       {
         //log exception
-        return StatusCode(400, "The amount of doors openable by Monty needs to be 2 more than the number of switches made");
+        return StatusCode(400, e.Message);
       }
       catch (Exception e)
       {
         //log exception
-        return StatusCode(500, "Unknown error occured");
+        return StatusCode(500);
       }
     }
   }

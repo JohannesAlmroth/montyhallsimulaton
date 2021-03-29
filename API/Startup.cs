@@ -1,6 +1,8 @@
+using System;
 using API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -48,6 +50,11 @@ namespace API
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
+        endpoints.MapGet("/", async context =>
+        {
+          Console.WriteLine();
+          await context.Response.WriteAsync("Hello World!");
+        });
       });
     }
   }
