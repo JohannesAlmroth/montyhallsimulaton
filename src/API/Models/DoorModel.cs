@@ -1,9 +1,14 @@
+using Newtonsoft.Json;
+
 namespace API.Models
 {
-  public class DoorModel<T>
+  public class DoorModel
   {
-    public T Content { get; set; }
+    [JsonProperty("content")]
+    public string Content { get; set; }
+    [JsonProperty("amount")]
     public int Amount { get; set; }
+    [JsonProperty("canBeOpenedByMonty")]
     public bool CanBeOpenedByMonty { get; set; }
   }
 }

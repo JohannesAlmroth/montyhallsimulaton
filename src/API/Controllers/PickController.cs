@@ -23,14 +23,24 @@ namespace API.Controllers
       return "Hello";
     }
 
-    [HttpPost]
-    public IActionResult PickOne<T>([FromBody] IEnumerable<DoorModel<T>> doors, [FromBody] int switches)
+    [HttpGet]
+    [Route("one")]
+    public ActionResult PickOne([FromBody] DoorRequest request)
     {
+      if (request == null)
+      {
+        return StatusCode(400);
+      }
       try
       {
-        return StatusCode(200, _pickService.PickADoor(doors, switches));
+        return StatusCode(200, _pickService.PickADoor(request.Doors, request.Switches));
       }
       catch (TooManySwitchesException e)
+      {
+        //log exception
+        return StatusCode(400, e.Message);
+      }
+      catch (NullReferenceException e)
       {
         //log exception
         return StatusCode(400, e.Message);

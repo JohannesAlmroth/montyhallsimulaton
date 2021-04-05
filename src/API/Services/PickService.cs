@@ -8,7 +8,7 @@ namespace API.Services
 {
   public interface IPickService
   {
-    public T PickADoor<T>(IEnumerable<DoorModel<T>> doors, int switches);
+    public string PickADoor(IEnumerable<DoorModel> doors, int switches);
   }
 
   public class PickService : IPickService
@@ -20,7 +20,7 @@ namespace API.Services
       _rand = new Random();
     }
 
-    public T PickADoor<T>(IEnumerable<DoorModel<T>> doors, int switches)
+    public string PickADoor(IEnumerable<DoorModel> doors, int switches)
     {
 
       var allDoors = doors.ToDictionary(d => d.Content, d => d.Amount);
