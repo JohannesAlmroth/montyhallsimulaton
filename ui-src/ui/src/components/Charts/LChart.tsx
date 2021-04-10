@@ -1,42 +1,43 @@
-import React from 'react';
 import { LineChart, XAxis, YAxis, Tooltip, Legend, Line, CartesianGrid } from 'recharts';
 import styled from 'styled-components';
 
-const data = [
-  { name: 'Round 0', car: 0, goat: 0},
-  { name: 'Round 1', car: 0, goat: 1},
-  { name: 'Round 2', car: 1, goat: 1},
-  { name: 'Round 3', car: 2, goat: 1},
-]
+interface DataPoint {
+  name: number;
+  [key: string]: number;
+}
 
 interface LChartProps {
-  data: string[];
+  data: DataPoint[];
 }
 
 export function LChart(props: LChartProps) {
-    return (
-      <Wrapper>
-        <LineChart
-          width={500}
-          height={300}
-          data={props.data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="car" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="goat" stroke="#82ca9d" />
-        </LineChart>
-      </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <LineChart
+        width={500}
+        height={300}
+        data={props.data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="1 1" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        {
+          // Assuming all keys are present in the first datapoint
+          Object.keys(props.data[0])
+            .filter(key => key !== 'name')
+            .map(key => <Line type="monotone" dataKey={key} stroke="#8884d8" activeDot={{ r: 8 }} />)
+        }
+      </LineChart>
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`

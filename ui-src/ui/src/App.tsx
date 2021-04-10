@@ -2,26 +2,25 @@ import './App.css';
 import { PastWins } from './components/PastWins';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { getResult } from './api/index';
 
 
 function App() {
-  var defaultPrizes = { car: 1, goat: 2 };
+  var defaultPrizes: {[prize: string]: number} = { "car": 1, "goat": 2 };
   const [listOfPrizes, setListOfPrizes] = useState(defaultPrizes);
-  const [picks, setPicks] = useState([]);
+  const [picksInOrder, setPicksInOrder] = useState<string[]>([]);
 
   const Simulate = async () => {
     // var result = await getResult(listOfPrizes);
-    var randomChoice = Math.floor(Math.Random() + 1);
-    var choices = ["car", "goat"];
+    var randomChoice = Math.floor(Math.random() + 1);
+    var choices = Object.keys(listOfPrizes);
     var pick = choices[randomChoice];
-    setPicks(picks.push(picks));
+    setPicksInOrder([ ...picksInOrder, pick]);
   }
 
   return (
     <Wrapper>
       <p>Monty Hall simulation</p>
-      <PastWins props={picks} />
+      <PastWins picksInOrder={picksInOrder} />
       <SimulateButton onClick={() => Simulate()}>Simulera</SimulateButton>
     </Wrapper>
   );
