@@ -1,1 +1,2 @@
-![Flowchart](https://imgur.com/a/CsjErfQ)
+#Running frontend
+Stand in this folder and run `npm run start`
