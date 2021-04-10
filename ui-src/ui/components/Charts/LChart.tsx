@@ -1,7 +1,7 @@
 import { LineChart, XAxis, YAxis, Tooltip, Legend, Line, CartesianGrid } from 'recharts';
 import styled from 'styled-components';
 
-interface DataPoint {
+export interface DataPoint {
   name: number;
   [key: string]: number;
 }

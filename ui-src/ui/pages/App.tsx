@@ -1,5 +1,5 @@
 import './App.css';
-import { PastWins } from './components/PastWins';
+import { PastWins } from '../components/PastWins';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
