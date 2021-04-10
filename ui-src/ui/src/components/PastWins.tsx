@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import 
-import { Chart } from './Chart';
+import { LChart } from './Charts/LChart';
 
-export function PastWins(props) {
+export function PastWins() {
 
   return (
     <div className="PastWins">
-			<Chart/>
+			<LChart data={} />
     </div>
   );
 }

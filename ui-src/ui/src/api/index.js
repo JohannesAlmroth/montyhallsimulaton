@@ -1,18 +1,19 @@
-const getUrl = async function(path) {
-	return `${publicRuntimeConfig.apiUrl}${path}`;
+const getUrl = function(path) {
+	return `localhost:5001/api/${path}`;
 }
 
-const getData = async function (path, body) {
+const postData = async function (path, payload) {
     let url;
     let res;
-
+    console.log(payload);
     try {
         url = getUrl(path);
         res = await fetch(url, {
-					method: 'GET',
+					method: 'POST',
 					body: JSON.stringify(payload),
 					headers: {
-							'Content-Type': 'application/json; charset=utf-8'
+                        'Accept': 'application/json',
+						'Content-Type': 'application/json; charset=utf-8'
         }
         });
 
@@ -32,13 +33,13 @@ const getData = async function (path, body) {
     } catch (e) {
         return {
             error: {
-                code:'500',
-                message: 'Server side error occured'
+                code: '500',
+                message: e.toString()
             }
         };
     }
 };
 
 export const getResult = async function(obj) {
-	return await getData('/pick', obj);
+	return await postData('pick/one', obj);
 }
