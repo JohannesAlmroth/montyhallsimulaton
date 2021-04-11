@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
+using System.Net.Http;
 using API.Models;
 using API.Models.Exceptions;
 using API.Services;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

@@ -4,7 +4,7 @@ namespace API.Models
 {
   public class DoorRequest
   {
-    public IEnumerable<DoorModel> Doors;
-    public int Switches;
+    public IEnumerable<DoorModel> Doors { get; set; }
+    public int Switches { get; set; }
   }
 }

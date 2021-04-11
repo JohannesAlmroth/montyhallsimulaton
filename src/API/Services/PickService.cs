@@ -28,7 +28,7 @@ namespace API.Services
 
       // For n amount of switches there must be at least n + 1 amount of doors
       // that can be opened by Monty
-      if (openableByMontyDoors.Sum(d => d.Value) - 1 <= switches)
+      if (openableByMontyDoors.Sum(d => d.Value) - 1 < switches)
       {
         throw new TooManySwitchesException("The amount of doors openable by Monty needs to be 1 more than the number of switches made");
       }
