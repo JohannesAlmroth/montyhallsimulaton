@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using API.Models;
 using API.Models.Exceptions;
 using API.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -23,7 +24,7 @@ namespace API.Controllers
       return "Hello";
     }
 
-    [HttpGet]
+    [HttpPost]
     [Route("one")]
     public ActionResult PickOne([FromBody] DoorRequest request)
     {
@@ -48,7 +49,7 @@ namespace API.Controllers
       catch (Exception e)
       {
         //log exception
-        return StatusCode(500);
+        return StatusCode(500, e.Message);
       }
     }
   }

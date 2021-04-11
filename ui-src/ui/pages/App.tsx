@@ -1,19 +1,26 @@
 import { PastWins } from '../components/PastWins';
 import { useState } from 'react';
+import { getPick } from '../api/index';
+import { DoorModel, PickRequest } from '../api/models/Pick';
 import styled from 'styled-components';
 
 
 function App() {
-  var defaultPrizes: {[prize: string]: number} = { "car": 1, "goat": 2 };
+  var defaultPrizes: DoorModel[] = [ { content: 'Car', amount: 1, canBeOpenedByMonty: false },
+  { content: 'Goat', amount: 2, canBeOpenedByMonty: true }]
   const [listOfPrizes, setListOfPrizes] = useState(defaultPrizes);
   const [picksInOrder, setPicksInOrder] = useState<string[]>([]);
 	const alternatives = [...new Set(Object.keys(listOfPrizes))];
 
   const Simulate = async () => {
-    var choices = Object.keys(listOfPrizes);
-    var randomChoice = Math.floor((Math.random() * Object.keys(listOfPrizes).length) + 1);
-    var pick = choices[randomChoice - 1];
-    setPicksInOrder([ ...picksInOrder, pick]);
+    const request: PickRequest = { doors: listOfPrizes, switches: 1 };
+    const pick = await getPick(request);
+    console.log("🚀 ~ file: App.tsx ~ line 18 ~ Simulate ~ pick", pick)
+    setPicksInOrder([...picksInOrder, pick]);
+    // var choices = Object.keys(listOfPrizes);
+    // var randomChoice = Math.floor((Math.random() * Object.keys(listOfPrizes).length) + 1);
+    // var pick = choices[randomChoice - 1];
+    // setPicksInOrder([ ...picksInOrder, pick]);
   }
 
   return (

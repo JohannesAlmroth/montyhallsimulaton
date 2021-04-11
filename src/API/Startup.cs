@@ -29,11 +29,24 @@ namespace API
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
       });
+      services.AddCors(options =>
+      {
+        options.AddPolicy("Policy1",
+            builder =>
+            {
+              builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowAnyOrigin();
+            });
+      });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+      app.UseCors("Policy1");
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
@@ -46,6 +59,7 @@ namespace API
       app.UseRouting();
 
       app.UseAuthorization();
+
 
       app.UseEndpoints(endpoints =>
       {

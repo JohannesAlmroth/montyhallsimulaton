@@ -1,45 +1,18 @@
-const getUrl = function(path) {
-	return `localhost:5001/api/${path}`;
-}
+import { PickRequest } from './models/Pick';
 
-const postData = async function (path, payload) {
-    let url;
-    let res;
-    console.log(payload);
+export const getPick = async function(payload: PickRequest) {
     try {
-        url = getUrl(path);
-        res = await fetch(url, {
-					method: 'POST',
-					body: JSON.stringify(payload),
-					headers: {
-                        'Accept': 'application/json',
-						'Content-Type': 'application/json; charset=utf-8'
-        }
-        });
-
-        const body = await res.json();
-        if (res.status >= 200 && res.status < 400) {
-            return {
-                data: body
-            };
-        } else {
-            return {
-                error: {
-                    code: res.status.toString(),
-                    message: body
-                }
-            };
-        }
-    } catch (e) {
-        return {
-            error: {
-                code: '500',
-                message: e.toString()
+        const res = await fetch('https://localhost:5001/api/pick/one', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json; charset=utf-8'
             }
-        };
+        });
+        return await res.json();
+    } catch (e) {
+        console.log('error', e);
+        throw new Error(`Error occured when fetching data ${e}`);
     }
-};
-
-export const getResult = async function(obj) {
-	return await postData('pick/one', obj);
 }
