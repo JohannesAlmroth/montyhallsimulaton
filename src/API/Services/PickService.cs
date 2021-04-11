@@ -42,7 +42,11 @@ namespace API.Services
         {
           openableByMontyDoors[selectedDoor] -= 1;
         }
+
         var doorOpenedByMonty = PickOneRandomWeighted(openableByMontyDoors);
+        openableByMontyDoors[doorOpenedByMonty] -= 1;
+        allDoors[doorOpenedByMonty] -= 1;
+
         selectedDoor = PickOneRandomWeighted(allDoors);
       }
 

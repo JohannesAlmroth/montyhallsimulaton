@@ -22,12 +22,6 @@ function App() {
     setPicksInOrder([]);
   }
 
-  const generateRoundInfo = () => {
-    return picksInOrder.map((pick, index) => {
-      <p>Round {index + 1}: {pick}</p>
-    }).reverse();
-  }
-
   return (
     <Wrapper>
       <p>Monty Hall simulation</p>
@@ -39,10 +33,6 @@ function App() {
 }
 
 export default App;
-
-const InfoWrapper = styled.div`
-  display: flex;
-`
 
 const Wrapper = styled.div`
   width: 100%;
