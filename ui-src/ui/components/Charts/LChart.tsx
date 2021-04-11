@@ -1,7 +1,6 @@
 import { LineChart, XAxis, YAxis, Tooltip, Legend, Line, CartesianGrid } from 'recharts';
 import { chartColors } from '../../styles/colors';
 import styled from 'styled-components';
-import { CreateRechartData } from '../../utils/chartUtils';
 
 export interface DataPoint {
   name: number;
@@ -10,6 +9,7 @@ export interface DataPoint {
 
 interface LChartProps {
   data: DataPoint[];
+  alternatives: string[];
 }
 
 export function LChart(props: LChartProps) {
@@ -31,10 +31,8 @@ export function LChart(props: LChartProps) {
         <YAxis />
         <Tooltip />
         <Legend />
-        {props.data &&
-          Object.keys(props.data[0])
-            .filter(key => key !== 'name')
-            .map((key, index) => <Line type="monotone" dataKey={key} stroke={chartColors[index % chartColors.length]} />)
+        {
+          props.alternatives.map((key, index) => <Line type="monotone" key={key} dataKey={key} stroke={chartColors[index % chartColors.length]} />)
         }
       </LineChart>
     </Wrapper>

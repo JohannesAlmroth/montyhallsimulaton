@@ -1,5 +1,5 @@
 import { PastWins } from '../components/PastWins';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 
@@ -7,19 +7,19 @@ function App() {
   var defaultPrizes: {[prize: string]: number} = { "car": 1, "goat": 2 };
   const [listOfPrizes, setListOfPrizes] = useState(defaultPrizes);
   const [picksInOrder, setPicksInOrder] = useState<string[]>([]);
+	const alternatives = [...new Set(Object.keys(listOfPrizes))];
 
   const Simulate = async () => {
-    // var result = await getResult(listOfPrizes);
-    var randomChoice = Math.floor(Math.random() + 1);
     var choices = Object.keys(listOfPrizes);
-    var pick = choices[randomChoice];
+    var randomChoice = Math.floor((Math.random() * Object.keys(listOfPrizes).length) + 1);
+    var pick = choices[randomChoice - 1];
     setPicksInOrder([ ...picksInOrder, pick]);
   }
 
   return (
     <Wrapper>
       <p>Monty Hall simulation</p>
-      <PastWins picksInOrder={picksInOrder} />
+      <PastWins picksInOrder={picksInOrder} alternatives={alternatives} />
       <SimulateButton onClick={() => Simulate()}>Simulera</SimulateButton>
     </Wrapper>
   );

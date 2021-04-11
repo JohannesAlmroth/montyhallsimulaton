@@ -3,15 +3,14 @@ import { CreateRechartData } from '../utils/chartUtils';
 
 interface PastWinsProps {
   picksInOrder: string[];
+  alternatives: string[];
 }
-
-const data2 = ['Car', 'Goat', 'Car', 'Goat' ];
 
 export function PastWins(props: PastWinsProps) {
 
   return (
     <div className="PastWins">
-      <LChart data={CreateRechartData(data2)} />
+      <LChart data={CreateRechartData(props.alternatives, props.picksInOrder)} alternatives={props.alternatives} />
     </div>
   );
 }
