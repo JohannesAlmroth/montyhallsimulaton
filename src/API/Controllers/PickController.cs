@@ -17,12 +17,6 @@ namespace API.Controllers
       _pickService = pickService;
     }
 
-    [HttpGet]
-    public string Happy()
-    {
-      return "Hello";
-    }
-
     [HttpPost]
     [Route("one")]
     public ActionResult PickOne([FromBody] DoorRequest request)
