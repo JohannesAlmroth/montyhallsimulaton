@@ -1,5 +1,6 @@
 import { LChart } from './Charts/LChart';
 import { CreateRechartData } from '../utils/chartUtils';
+import styled from 'styled-components';
 
 interface PastWinsProps {
   picksInOrder: string[];
@@ -9,8 +10,17 @@ interface PastWinsProps {
 export function PastWins(props: PastWinsProps) {
 
   return (
-    <div className="PastWins">
+    <Wrapper>
       <LChart data={CreateRechartData(props.alternatives, props.picksInOrder)} alternatives={props.alternatives} />
-    </div>
+      {props.picksInOrder.length > 0 &&
+        props.picksInOrder.map((pick, index) => {
+          return <p>Round {index + 1}: {pick}</p>
+        }).reverse()
+      }
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  
+`;
